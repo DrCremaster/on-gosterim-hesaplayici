@@ -1,0 +1,95 @@
+<div id="kreatinin" class="section">
+    <h3>Kreatinin Tahmini</h3>
+    <div class="form-group">
+      <label for="gender">Cinsiyet</label>
+      <select id="gender">
+        <option value="">Seçiniz</option>
+        <option value="male">Erkek</option>
+        <option value="female">Kadın</option>
+      </select>
+      <span id="gender_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Yaş</label>
+      <input type="number" id="age" placeholder="Yaşınızı girin" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <span id="age_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="weight">Kilo (kg)</label>
+      <input type="number" id="weight" placeholder="Kilonuzu girin" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <span id="weight_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="height">Boy (cm)</label>
+      <input type="number" id="height" placeholder="Boyunuzu girin" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <span id="height_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="fat">Yağ Oranı (%)</label>
+      <input type="number" id="fat" placeholder="Yağ oranınızı girin" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <p class="optional">Opsiyonel</p>
+      <span id="fat_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="water">Atılan Su (L)</label>
+      <input type="number" id="water" placeholder="Son 24 saatteki idrar hacmi" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <p class="optional">Opsiyonel, ortalama 1.5</p>
+      <span id="water_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="protein">Protein (g)</label>
+      <input type="number" id="protein" placeholder="Günlük etten alınan protein" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <p class="optional">Opsiyonel, ortalama 60</p>
+      <span id="protein_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="creatine">Kreatin (g)</label>
+      <input type="number" id="creatine" placeholder="Günlük kreatin takviyesi" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <p class="optional">Opsiyonel, ortalama 0</p>
+      <span id="creatine_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Aktivite (0-10)</label>
+      <input type="number" id="activity" placeholder="Ne kadar aktifsiniz? (10 en aktif)" min="0" max="10" onkeyup="if(event.keyCode === 13) hesaplaKreatininTahmini()">
+      <p class="optional">Opsiyonel, ortalama 5</p>
+      <span id="activity_warning" class="input-warning"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="lbmMethod">LBM Hesaplama Yöntemi</label>
+      <select id="lbmMethod">
+        <option value="fat">Yağ Oranına Göre</option>
+        <option value="boer">Boer Formülü (Boy ve Kilo)</option>
+        <option value="both">Her İkisi</option>
+      </select>
+      <span id="lbmMethod_warning" class="input-warning"></span>
+    </div>
+
+    <button onclick="hesaplaKreatininTahmini()">Hesapla</button>
+
+    <div class="result-card" id="kreatininResultCard" style="display:none">
+      <div class="result-value" id="kreatininResultValue">0.00 - 0.00 mg/dL</div>
+      <div class="interpretation" id="kreatininInterpretation">Sonuçlarınız burada görünecek</div>
+    </div>
+
+    <div class="result-card" id="kreatininResultFat" style="display:none">
+      <strong>Yağ oranına göre hesaplanan kreatinin:</strong>
+      <div class="result-value" id="kreatininValueFat">-</div>
+    </div>
+
+    <div class="result-card" id="kreatininResultBoer" style="display:none">
+      <strong>Boer formülüne göre hesaplanan kreatinin:</strong>
+      <div class="result-value" id="kreatininValueBoer">-</div>
+    </div>
+    <div class="disclaimer">
+      Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
+    </div>
+  </div>
