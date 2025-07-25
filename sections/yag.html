@@ -1,58 +1,99 @@
-<div id="protein" class="section">
-    <h3>Günlük Protein İhtiyacı</h3>
-    <input type="number" id="p_kilo" placeholder="Kilonuz (kg)" onkeyup="if(event.keyCode === 13) hesaplaProtein()" />
-    <span id="p_kilo_warning" class="input-warning"></span>
-    <select id="p_hedef" onchange="hesaplaProtein()">
-      <option value="">-- Hedefinizi Seçiniz --</option>
-      <option value="koruma">Kilo Korumak (Maintenance)</option>
-      <option value="alma">Kilo Almak (Bulk)</option>
-      <option value="verme">Kilo Vermek (Definasyon)</option>
-    </select>
-    <span id="p_hedef_warning" class="input-warning"></span>
-    <button onclick="hesaplaProtein()">Hesapla</button>
-    <div id="proteinSonuc" class="result"></div>
-    <div class="supplement-section-info">
-      <h5>Protein Hakkında Bilgi:</h5>
-      <div class="not-metin">
-        <strong>Ne işe yarar:</strong> Kas onarımı ve büyümesi için temel yapı taşıdır. Tokluk hissini artırır, metabolizmayı hızlandırır.
-        <br><strong>Nasıl kullanılır:</strong> Günlük ihtiyacı karşılamak üzere ana öğünlere ve ara öğünlere yayılarak alınır. Protein tozları pratik bir ek olabilir.
-        <br><strong>Etkisi ne zaman görülür:</strong> Düzenli ve yeterli alımda kas gelişimi ve toparlanması üzerinde uzun vadeli etki gösterir. Akut olarak tokluk hissi sağlar.
-      </div>
-      <div class="doz-bilgisi">
-        <h6>Doz Aşımı (Hafifçe Yüksek Alım):</h6>
-        <ul class="not-maddeler">
-          <li><span class="turuncu">Olası Olumsuz Etkileri:</span>
-            <ul>
-              <li>Hafif şişkinlik, gaz.</li>
-              <li>Enerji dengesinde hafif kaymalar (karbonhidrat ve yağ alımı azaldığında).</li>
-            </ul>
-          </li>
-          <li><span class="yesil">Olası Olumlu Etkileri:</span>
-            <ul>
-              <li>Belirli durumlarda tokluk hissini artırabilir, bu da kilo kontrolüne yardımcı olabilir.</li>
-              <li>Yoğun antrenman dönemlerinde kas yıkımını minimize etmeye yardımcı olabilir.</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="doz-bilgisi danger">
-        <h6>Aşırı Doz Aşımı (Çok Yüksek ve Uzun Süreli Alım):</h6>
-        <ul class="not-maddeler">
-          <li><strong>Günlük 30 gram üzeri ve uzun süreli kullanım:</strong>
-            <ul>
-              <li><span class="kirmizi">Olumsuz Etkileri:</span>
-                <ul>
-                   <li>Mide rahatsızlığı, bulantı, ishal.</li>
-                   <li>Uzun süreli aşırı alım böbrekler üzerinde ek yük oluşturabilir (özellikle mevcut böbrek hastalığı olanlar için).</li>
-                   <li>Vücutta sıvı dengesizliği.</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="disclaimer">
-      Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz veya supplement kullanımı hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
-    </div>
+<div id="yag" class="section">
+  <h3>Yağ Oranı & Vücut Kitle İndeksi (VKİ)</h3>
+  <select id="y_cinsiyet" onchange="toggleHipInput()">
+    <option value="">-- Cinsiyetinizi Seçiniz --</option>
+    <option value="erkek">Erkek</option>
+    <option value="kadin">Kadın</option>
+  </select>
+  <span id="y_cinsiyet_warning" class="input-warning"></span>
+  <input type="number" id="y_boy" placeholder="Boy (cm)" onkeyup="if(event.keyCode === 13) hesaplaYagOrani()" />
+  <span id="y_boy_warning" class="input-warning"></span>
+  <input type="number" id="y_kilo" placeholder="Kilo (kg)" onkeyup="if(event.keyCode === 13) hesaplaYagOrani()" />
+  <span id="y_kilo_warning" class="input-warning"></span>
+  <input type="number" id="y_boyun" placeholder="Boyun Çevresi (cm)" onkeyup="if(event.keyCode === 13) hesaplaYagOrani()" />
+  <span id="y_boyun_warning" class="input-warning"></span>
+  <input type="number" id="y_bel" placeholder="Bel Çevresi (cm)" onkeyup="if(event.keyCode === 13) hesaplaYagOrani()" />
+  <span id="y_bel_warning" class="input-warning"></span>
+  <input type="number" id="y_kalca" placeholder="Kalça Çevresi (cm)" class="hidden" onkeyup="if(event.keyCode === 13) hesaplaYagOrani()" />
+  <span id="y_kalca_warning" class="input-warning"></span>
+  <button onclick="hesaplaYagOrani()">Hesapla</button>
+  <div id="yagSonuc" class="result"></div>
+  <div id="vkiSonuc" class="result"></div>
+
+  <h4>Vücut Yağ Oranı Kategorileri (Genel Rehber)</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Kategori</th>
+        <th>Erkekler (%)</th>
+        <th>Kadınlar (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Temel Yağ</td>
+        <td>2-5%</td>
+        <td>10-13%</td>
+      </tr>
+      <tr>
+        <td>Atletik</td>
+        <td>6-13%</td>
+        <td>14-20%</td>
+      </tr>
+      <tr>
+        <td>Fit</td>
+        <td>14-17%</td>
+        <td>21-24%</td>
+      </tr>
+      <tr>
+        <td>Ortalama</td>
+        <td>18-24%</td>
+        <td>25-31%</td>
+      </tr>
+      <tr>
+        <td>Obez</td>
+        <td>25%+</td>
+        <td>32%+</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Vücut Kitle İndeksi (VKİ) Kategorileri</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>VKİ</th>
+        <th>Kategori</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt; 18.5</td>
+        <td>Zayıf</td>
+      </tr>
+      <tr>
+        <td>18.5 - 24.9</td>
+        <td>Normal Kilolu</td>
+      </tr>
+      <tr>
+        <td>25.0 - 29.9</td>
+        <td>Fazla Kilolu</td>
+      </tr>
+      <tr>
+        <td>30.0 - 34.9</td>
+        <td>Obezite (1. Derece)</td>
+      </tr>
+      <tr>
+        <td>35.0 - 39.9</td>
+        <td>Obezite (2. Derece)</td>
+      </tr>
+      <tr>
+        <td>&gt;= 40.0</td>
+        <td>Morbid Obezite (3. Derece)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="disclaimer">
+    Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz veya supplement kullanımı hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
   </div>
+</div>
