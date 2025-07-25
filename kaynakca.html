@@ -23,28 +23,61 @@
       padding-bottom: 10px;
       border-bottom: 1px solid #ecf0f1;
     }
-    .supplement-baslik {
-      font-size: 1.3rem;
-      color: #2c3e50;
-      margin: 25px 0 10px 0;
-      font-weight: 500;
-      display: flex;
+    .supplement-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 4px solid #4361ee;
+      text-align: left; /* Sola dayalı yapıyoruz */
     }
-    .supplement-baslik:before {
-      content: "•";
-      margin-right: 10px;
-      color: #7f8c8d;
+    .supplement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .supplement-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+      text-align: left; /* Başlık sola dayalı */
+    }
+    .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .kaynak-listesi {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+      padding: 0;
+      text-align: left; /* İçerik sola dayalı */
+    }
+    .kaynak-listesi.active {
+      max-height: 1000px;
+      padding: 15px 0;
     }
     .kaynak-item {
-      margin: 8px 0 8px 30px;
+      margin: 10px 0;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
       line-height: 1.6;
-      color: #34495e;
-      position: relative;
+      text-align: left; /* Kaynaklar sola dayalı */
     }
-    .kaynak-item:before {
-      content: "-";
-      position: absolute;
-      left: -15px;
+    .kaynak-link {
+      color: #4361ee;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .kaynak-link:hover {
+      text-decoration: underline;
     }
     .geri-buton-container {
       text-align: center;
@@ -72,42 +105,132 @@
 <body>
 <div class="container">
   <div class="kaynakca-container">
-    <h1 class="ana-baslik">KAYNAKÇA</h1>
+    <h1 class="ana-baslik">BİLİMSEL KAYNAKLAR</h1>
     
-    <div class="supplement-baslik">Protein</div>
-    <div class="kaynak-item">Kaynak 1</div>
-    <div class="kaynak-item">Kaynak 2</div>
-    <div class="kaynak-item">Kaynak 3</div>
+    <!-- Protein Kartı -->
+    <div class="supplement-card" onclick="toggleKaynak('protein')">
+      <div class="supplement-header">
+        <h3 class="supplement-title">Protein</h3>
+        <span class="toggle-icon" id="protein-icon">▼</span>
+      </div>
+      <div class="kaynak-listesi" id="protein-kaynak">
+        <div class="kaynak-item">
+          <strong>Morton 2018 Meta-Analiz:</strong> 1.6-2.2 g/kg dozunu destekler.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+        <div class="kaynak-item">
+          <strong>Phillips 2016:</strong> Definasyon döneminde 2.3-3.1 g/kg önerisi.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/26500462/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+      </div>
+    </div>
 
-    <div class="supplement-baslik">Kreatin</div>
-    <div class="kaynak-item">Kaynak 1</div>
-    <div class="kaynak-item">Kaynak 2</div>
-    <div class="kaynak-item">Kaynak 3</div>
+    <!-- Kreatin Kartı -->
+    <div class="supplement-card" onclick="toggleKaynak('kreatin')">
+      <div class="supplement-header">
+        <h3 class="supplement-title">Kreatin</h3>
+        <span class="toggle-icon" id="kreatin-icon">▼</span>
+      </div>
+      <div class="kaynak-listesi" id="kreatin-kaynak">
+        <div class="kaynak-item">
+          <strong>Kreider 2017 Meta-Analiz:</strong> 0.03-0.05 g/kg idame dozu.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/28615996/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+        <div class="kaynak-item">
+          <strong>Buford 2007:</strong> Veganlarda yüksek doz (0.075 g/kg) gereksinimi.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/17908291/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+      </div>
+    </div>
 
-    <div class="supplement-baslik">Kafein</div>
-    <div class="kaynak-item">Kaynak 1</div>
-    <div class="kaynak-item">Kaynak 2</div>
-    <div class="kaynak-item">Kaynak 3</div>
+    <!-- Beta-Alanin Kartı -->
+    <div class="supplement-card" onclick="toggleKaynak('beta')">
+      <div class="supplement-header">
+        <h3 class="supplement-title">Beta-Alanin</h3>
+        <span class="toggle-icon" id="beta-icon">▼</span>
+      </div>
+      <div class="kaynak-listesi" id="beta-kaynak">
+        <div class="kaynak-item">
+          <strong>Hobson 2012 Meta-Analiz:</strong> 4-6 g/gün (≈0.065-0.08 g/kg).
+          <a href="https://pubmed.ncbi.nlm.nih.gov/22451437/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+        <div class="kaynak-item">
+          <strong>Saunders 2017:</strong> 0.1 g/kg'ye kadar güvenli.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/28615996/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+      </div>
+    </div>
 
-    <div class="supplement-baslik">Sitrülin Malat</div>
-    <div class="kaynak-item">Kaynak 1</div>
-    <div class="kaynak-item">Kaynak 2</div>
-    <div class="kaynak-item">Kaynak 3</div>
+    <!-- Sitrülin Malat Kartı -->
+    <div class="supplement-card" onclick="toggleKaynak('sitrulin')">
+      <div class="supplement-header">
+        <h3 class="supplement-title">Sitrülin Malat</h3>
+        <span class="toggle-icon" id="sitrulin-icon">▼</span>
+      </div>
+      <div class="kaynak-listesi" id="sitrulin-kaynak">
+        <div class="kaynak-item">
+          <strong>Rhodes 2021 Meta-Analiz:</strong> 6-8 g/gün (≈0.1 g/kg).
+          <a href="https://pubmed.ncbi.nlm.nih.gov/33466487/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+        <div class="kaynak-item">
+          <strong>Bendahan 2002:</strong> 0.15 g/kg dozunda ATP üretiminde artış.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/11792871/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+      </div>
+    </div>
 
-    <div class="supplement-baslik">Beta Alanin</div>
-    <div class="kaynak-item">Kaynak 1</div>
-    <div class="kaynak-item">Kaynak 2</div>
-    <div class="kaynak-item">Kaynak 3</div>
+    <!-- Kafein Kartı -->
+    <div class="supplement-card" onclick="toggleKaynak('kafein')">
+      <div class="supplement-header">
+        <h3 class="supplement-title">Kafein</h3>
+        <span class="toggle-icon" id="kafein-icon">▼</span>
+      </div>
+      <div class="kaynak-listesi" id="kafein-kaynak">
+        <div class="kaynak-item">
+          <strong>Southward 2018 Meta-Analiz:</strong> 3-6 mg/kg optimal.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/30068048/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+        <div class="kaynak-item">
+          <strong>Goldstein 2010:</strong> 400 mg/gün üst sınır.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/20211210/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+      </div>
+    </div>
 
-    <div class="supplement-baslik">Karnitin</div>
-    <div class="kaynak-item">Kaynak 1</div>
-    <div class="kaynak-item">Kaynak 2</div>
-    <div class="kaynak-item">Kaynak 3</div>
+    <!-- L-Karnitin Kartı -->
+    <div class="supplement-card" onclick="toggleKaynak('karnitin')">
+      <div class="supplement-header">
+        <h3 class="supplement-title">L-Karnitin</h3>
+        <span class="toggle-icon" id="karnitin-icon">▼</span>
+      </div>
+      <div class="kaynak-listesi" id="karnitin-kaynak">
+        <div class="kaynak-item">
+          <strong>Fielding 2018:</strong> 15-30 mg/kg doz aralığı.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/29308661/" class="kaynak-link" target="_blank">Makaleyi Görüntüle</a>
+        </div>
+        <div class="kaynak-item">
+          <strong>Examine.com:</strong> Yağ yakımı için etkinlik analizi.
+          <a href="https://examine.com/supplements/l-carnitine/" class="kaynak-link" target="_blank">Kaynağı Görüntüle</a>
+        </div>
+      </div>
+    </div>
 
+    <!-- Geri Dönüş Butonu -->
     <div class="geri-buton-container">
       <a href="index.html" class="geri-buton">Ana Sayfaya Dön</a>
     </div>
   </div>
 </div>
+
+<script>
+  // Açılır-kapanır fonksiyonu
+  function toggleKaynak(supplementId) {
+    const kaynakListesi = document.getElementById(`${supplementId}-kaynak`);
+    const toggleIcon = document.getElementById(`${supplementId}-icon`);
+    
+    kaynakListesi.classList.toggle('active');
+    toggleIcon.textContent = kaynakListesi.classList.contains('active') ? '▲' : '▼';
+  }
+</script>
 </body>
 </html>
