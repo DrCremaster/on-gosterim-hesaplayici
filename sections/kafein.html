@@ -1,0 +1,114 @@
+
+<div id="kafein" class="section">
+  <h3>Kafein</h3>
+  <input type="number" id="c_kilo" placeholder="Kilonuz (kg)" onkeyup="if(event.keyCode === 13) hesaplaKafein()" />
+  <span id="c_kilo_warning" class="input-warning"></span>
+  <button onclick="hesaplaKafein()">Hesapla</button>
+  <div id="kafeinSonuc" class="result"></div>
+
+  <div class="supplement-section-info">
+    <h5>Kafein Hakkında Bilgi:</h5>
+    <div class="not-metin">
+      <strong>Ne işe yarar:</strong> Merkezi sinir sistemini uyararak uyanıklığı artırır, yorgunluğu azaltır, odaklanmayı güçlendirir ve egzersiz performansını (özellikle dayanıklılık ve güç) artırır.
+      <br><strong>Nasıl kullanılır:</strong> Genellikle antrenmandan 30-60 dakika önce alınır. Kafein toleransı kişiden kişiye değiştiği için düşük dozla başlayıp kademeli artırmak önemlidir.
+      <br><strong>Etkisi ne zaman görülür:</strong> Alımdan sonra 30-60 dakika içinde etkileri başlar ve 3-6 saat sürebilir.
+    </div>
+
+    <div class="doz-bilgisi">
+      <h6>Sporcularda Önerilen Üst Sınır:</h6>
+      <div class="not-metin">
+        <strong>6 mg/kg</strong> genellikle egzersiz performansı için kullanılan <u>maksimum tek seferlik</u> dozdur. Kişinin kilosuna göre hesaplanır. Örneğin 70 kg biri için bu 420 mg’dır. Performans artışı sağlar ancak hassas kişilerde yan etki yapabilir.
+      </div>
+    </div>
+
+    <div class="doz-bilgisi">
+      <h6>Resmi Kurumların Günlük Üst Sınırları:</h6>
+      <div class="not-metin">
+        Günlük toplam kafein alımı sınırları kurumlara göre değişebilir. Aşağıdaki değerler <u>sabit mg cinsindendir</u>:
+        <ul class="not-maddeler">
+          <li><strong>FDA (ABD):</strong> 400 mg/gün (sağlıklı yetişkinler)</li>
+          <li><strong>EFSA (AB):</strong> 400 mg/gün, tek seferde max 3 mg/kg</li>
+          <li><strong>WHO:</strong> Hamilelerde 300 mg/gün</li>
+          <li><strong>Türk Gıda Kodeksi:</strong> Takviyelerde 200 mg/gün</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doz-bilgisi">
+      <h6>Doz Aşımı (Hafifçe Yüksek Alım: 400 mg - 600 mg arası)</h6>
+      <ul class="not-maddeler">
+        <li><span class="turuncu">Olası Olumsuz Etkileri:</span>
+          <ul>
+            <li>Hafif sinirlilik, huzursuzluk, kaygı.</li>
+            <li>Uykusuzluk, uykuya dalmada zorluk.</li>
+            <li>Hafif kalp çarpıntısı, baş ağrısı.</li>
+            <li>Mide rahatsızlığı, mide bulantısı.</li>
+          </ul>
+        </li>
+        <li><span class="yesil">Olası Olumlu Etkileri:</span>
+          <ul>
+            <li>Çok yüksek odaklanma ve uyanıklık hali.</li>
+            <li>Egzersiz performansında ve güç çıktısında potansiyel olarak daha belirgin artış (toleransı yüksek bireylerde).</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="doz-bilgisi danger">
+      <h6>Aşırı Doz Aşımı (10 mg/kg üzeri)</h6>
+      <ul class="not-maddeler">
+        <li><span class="kirmizi"><strong>Potansiyel Riskler:</strong></span>
+          <ul>
+            <li>Bu dozlar, çoğu bireyde ciddi yan etkilere neden olabilir.</li>
+            <li>Vücut ağırlığına göre hesaplandığında yüksek kabul edilir.</li>
+          </ul>
+        </li>
+        <li><strong>1000 mg (1 gram) üzeri:</strong>
+          <ul>
+            <li><span class="kirmizi">Olumsuz Etkileri:</span>
+              <ul>
+                <li>Şiddetli mide bulantısı, kusma, ishal.</li>
+                <li>Titreme, panik atak benzeri semptomlar.</li>
+                <li>Belirgin kalp çarpıntısı ve düzensiz kalp atışları (aritmi).</li>
+                <li>Tansiyonda ani yükseliş.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong>5000 mg (5 gram) üzeri:</strong>
+          <ul>
+            <li><span class="kirmizi">Olumsuz Etkileri:</span>
+              <ul>
+                <li>Aşırı şiddetli titreme, kas seğirmeleri.</li>
+                <li>Halüsinasyonlar, nöbetler, bilinç bulanıklığı.</li>
+                <li>Nefes darlığı, kalp krizi ve koma riski (hayati tehlike).</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong>10000 mg (10 gram) üzeri:</strong>
+          <ul>
+            <li><span class="kirmizi">Olumsuz Etkileri:</span>
+              <ul>
+                <li>Akut kafein zehirlenmesi ve ölümcül sonuçlar.</li>
+                <li>Merkezi sinir sistemi ve kalp-damar sisteminde geri dönüşü olmayan hasar riski.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="doz-bilgisi danger">
+      <h6>DİKKAT:</h6>
+      <div class="not-metin kirmizi">
+        <strong>Tıbbi uyarı:</strong><br>
+        Kalp-damar hastalığı, yüksek tansiyon, anksiyete bozukluğu veya uyku problemi olan bireylerde kafein kullanımı ciddi sağlık riski oluşturabilir. Yukarıda belirtilen <strong>1 gram ve üzeri dozlar</strong> tehlikeli kabul edilir ve acil tıbbi müdahale gerektirebilir.
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz veya supplement kullanımı hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
+  </div>
+</div>
