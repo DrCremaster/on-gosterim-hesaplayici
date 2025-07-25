@@ -1,0 +1,358 @@
+:root {
+  --primary-color: #4361ee;
+  --primary-light: #4895ef;
+  --secondary-color: #3f37c9;
+  --dark-color: #1a1a2e;
+  --light-color: #f8f9fa;
+  --success-color: #4cc9f0;
+  --warning-color: #f72585;
+  --danger-color: #ef233c;
+  --info-color: #7209b7;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+  min-height: calc(100vh + 150px);
+  position: relative;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+h2, h3, h4 {
+  color: var(--dark-color);
+  margin-top: 0;
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+select, input, button {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 8px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+select:focus, input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  padding: 10px;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.section {
+  display: none;
+  margin-top: 25px;
+  padding-top: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  background-color: #f0f7ff;
+  border-left: 4px solid var(--primary-color);
+  color: var(--dark-color);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.result b {
+  color: var(--primary-color);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: #f0f4f8;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.checkbox-group label:hover {
+  background: #e0e8f0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  margin-top: 0;
+}
+
+.not-baslik {
+  font-weight: 600;
+  color: var(--dark-color);
+  margin: 15px 0 8px;
+}
+
+.not-metin {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.not-maddeler {
+  padding-left: 20px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.kirmizi {
+  color: var(--danger-color);
+}
+
+.yesil {
+  color: #28a745;
+}
+
+.turuncu {
+  color: #f8961e;
+}
+
+.formula {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--primary-light);
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+tr:hover {
+  background-color: #f1f5ff;
+}
+
+.disclaimer {
+  margin: 25px 0;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-weight: 500;
+  background-color: #f8d7da;
+  border-left: 4px solid var(--danger-color);
+  color: var(--danger-color);
+  font-size: 0.85rem;
+}
+
+.general-disclaimer {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  color: #856404;
+  font-size: 0.9rem;
+}
+
+.result-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: var(--box-shadow);
+  border-left: 4px solid var(--primary-color);
+}
+
+.result-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 15px 0;
+  color: var(--primary-color);
+}
+
+.interpretation {
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--dark-color);
+  font-size: 0.95rem;
+}
+
+.optional {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  margin-top: 4px;
+}
+
+.input-warning {
+  color: var(--danger-color);
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.supplement-section-info {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(135deg, #f0f7ff, #e6f0fa);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--primary-light);
+}
+
+.supplement-section-info h5 {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  border-bottom: 1px dashed var(--primary-light);
+  padding-bottom: 5px;
+}
+
+.doz-bilgisi {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  background-color: #fff9e6;
+  border-left: 5px solid #ffc107;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.doz-bilgisi.danger {
+  background-color: #ffe6e6;
+  border-left: 5px solid var(--danger-color);
+}
+
+.doz-bilgisi h6 {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--dark-color);
+}
+
+.doz-bilgisi ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.doz-bilgisi li {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  .container {
+    padding: 20px;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  select, input, button {
+    font-size: 0.9rem;
+  }
+  .result, .not-metin, .not-maddeler, table, .general-disclaimer, .interpretation, .disclaimer, .checkbox-group label {
+    font-size: 0.85rem;
+  }
+  .supplement-section-info h5 {
+    font-size: 1rem;
+  }
+  .doz-bilgisi h6 {
+    font-size: 0.95rem;
+  }
+}
+
+.page-footer-spacer {
+    height: 150px;
+    width: 100%;
+    clear: both;
+}
