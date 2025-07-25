@@ -78,7 +78,7 @@ function hesaplaProtein() {
         recommendation = "Kilo alma döneminde kas gelişimi için yüksek protein alımı önerilir.";
     } else if (hedef === "verme") {
         min = 1.8; max = 2.4;
-        formulaText = `Kilonuzun her kilogramı için 1.8 - 2.4 gram protein.`;
+        formulaText = `Kütlenizin her kilogramı için 1.8 - 2.4 gram protein.`;
         recommendation = "Kilo verme döneminde kas kaybını önlemek için yüksek protein alımı önerilir.";
     } else {
         formulaText = `Kilonuzun her kilogramı için 1.4 - 1.8 gram protein.`;
@@ -262,7 +262,7 @@ function hesaplaKarnitin() {
     const content = `
         <div class="result-value">${minDozMg} - ${maxDozMg} mg/gün</div>
         <div class="interpretation">
-            <p class="formula">Kilonuzun her kilogramı için 15 - 30 mg.</p>
+            <p class="formula">Kilonuzun her kilogramı için 15 - 30 mg. Genel kullanım 2-4 gram arası.Min doz 1 gr max doz günlük 4gr</p>
         </div>
     `;
     
