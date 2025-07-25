@@ -226,7 +226,6 @@ function hesaplaBeta() {
     const content = `
         <div class="result-value">${minDoz} - ${maxDoz} g/gün</div>
         <div class="interpretation">
-            <p>Günlük Beta-Alanin Dozu: <b>${minDoz} – ${maxDoz} gram</b></p>
             <p class="formula">Kilonuzun her kilogramı için 0.065 - 0.080 gram.</p>
         </div>
     `;
@@ -245,7 +244,6 @@ function hesaplaSitrulin() {
     const content = `
         <div class="result-value">${minDoz} - ${maxDoz} g/gün</div>
         <div class="interpretation">
-            <p>Günlük Sitrülin Malat Dozu: <b>${minDoz} – ${maxDoz} gram</b></p>
             <p class="formula">Kilonuzun her kilogramı için 0.10 - 0.15 gram.</p>
         </div>
     `;
@@ -264,8 +262,27 @@ function hesaplaKarnitin() {
     const content = `
         <div class="result-value">${minDozMg} - ${maxDozMg} mg/gün</div>
         <div class="interpretation">
-            <p>Günlük L-Karnitin Dozu: <b>${minDozMg} – ${maxDozMg} mg</b></p>
             <p class="formula">Kilonuzun her kilogramı için 15 - 30 mg.</p>
+        </div>
+    `;
+    
+    showResult(resultDiv, content);
+}
+
+function hesaplaKreatin() {
+    const result = validateInputAndGetResultDiv("k_kilo", "kreatinSonuc");
+    if (!result) return;
+
+    const kilo = result.value;
+    const resultDiv = result.resultDiv;
+
+    const idameMin = (kilo * 0.03).toFixed(1);
+    const idameMax = (kilo * 0.05).toFixed(1);
+
+    const content = `
+        <div class="result-value">${idameMin} - ${idameMax} g/gün</div>
+        <div class="interpretation">
+            <p class="formula">Kilonuzun her kilogramı için 0.03 - 0.05 gram (idame dozu).</p>
         </div>
     `;
     
@@ -283,8 +300,7 @@ function hesaplaKafein() {
     const content = `
         <div class="result-value">${alt.toFixed(0)} - ${ust.toFixed(0)} mg</div>
         <div class="interpretation">
-            <p>Antrenman Öncesi Kafein Dozu: <b>${alt.toFixed(0)} – ${ust.toFixed(0)} mg</b></p>
-            <p class="kirmizi"><strong>Uyarı:</strong> Günlük maksimum 400 mg'ı aşmayın!</p>
+            <p class="formula">Kilonuzun her kilogramı için 3 - 6 mg.</p>
         </div>
     `;
     
@@ -419,23 +435,6 @@ function hesaplaKreatininTahmini() {
     isValid = false;
   }
 
-  if (waterInput.value !== '' && (isNaN(+waterInput.value) || +waterInput.value < 0)) {
-    document.getElementById('water_warning').textContent = "Lütfen geçerli bir su hacmi girin.";
-    isValid = false;
-  }
-  if (proteinInput.value !== '' && (isNaN(+proteinInput.value) || +proteinInput.value < 0)) {
-    document.getElementById('protein_warning').textContent = "Lütfen geçerli bir protein miktarı girin.";
-    isValid = false;
-  }
-  if (creatineInput.value !== '' && (isNaN(+creatineInput.value) || +creatineInput.value < 0)) {
-    document.getElementById('creatine_warning').textContent = "Lütfen geçerli bir kreatin miktarı girin.";
-    isValid = false;
-  }
-  if (activityInput.value !== '' && (isNaN(+activityInput.value) || +activityInput.value < 0 || +activityInput.value > 10)) {
-    document.getElementById('activity_warning').textContent = "Aktivite seviyesi 0-10 arasında olmalıdır.";
-    isValid = false;
-  }
-
   const kreatininResultCard = document.getElementById('kreatininResultCard');
   const kreatininInterpretation = document.getElementById('kreatininInterpretation');
   const kreatininResultValue = document.getElementById('kreatininResultValue');
@@ -506,47 +505,6 @@ function hesaplaKreatininTahmini() {
   }
 
   kreatininResultValue.textContent = displayText;
-  kreatininInterpretation.textContent = 'Bu aralıkta bir kreatinin düzeyi teorik olarak beklenebilir.';
+  kreatininInterpretation.textContent = 'Bu tahmini aralık, vücut kompozisyonunuza göre beklenen kreatinin seviyelerini gösterir.';
   kreatininResultCard.style.display = 'block';
-
-    const savedCreatinine8Aug = 1.25;
-    const savedCreatinine29Jan = 1.08;
-    const creatinineReferenceMin = 0.7;
-    const creatinineReferenceMax = 1.2;
-
-    let userInterpretation = '';
-
-    if (displayText.includes('Her iki yöntem aşağıda listelendi')) {
-      const [minFat, maxFat] = getValue(lbmFat);
-      const [minBoer, maxBoer] = getValue(lbmBoer);
-
-      userInterpretation += `<p>Sizin kayıtlı kan kreatinin değeriniz <strong>(6 Ağustos 2024: ${savedCreatinine8Aug} mg/dL, 29 Ocak 2025: ${savedCreatinine29Jan} mg/dL)</strong> ve referans aralığı <strong>(${creatinineReferenceMin}-${creatinineReferenceMax} mg/dL)</strong> dikkate alındığında:</p>`;
-      
-      let fatMatch = (parseFloat(minFat) <= savedCreatinine29Jan && savedCreatinine29Jan <= parseFloat(maxFat));
-      let boerMatch = (parseFloat(minBoer) <= savedCreatinine29Jan && savedCreatinine29Jan <= parseFloat(maxBoer));
-
-      if (fatMatch && boerMatch) {
-        userInterpretation += `<p class="yesil">Hem Yağ Oranı hem de Boer formüllerine göre yapılan tahminler, son kreatinin değerinizle oldukça uyumludur. Bu, vücut kompozisyonunuz ve yaşam tarzınızla uyumlu bir seviye olduğunu göstermektedir.</p>`;
-      } else if (fatMatch) {
-        userInterpretation += `<p class="turuncu">Yağ Oranına göre yapılan tahmininiz, son kreatinin değerinizle daha uyumlu görünmektedir. Boer formülü ise biraz farklı bir sonuç vermiştir.</p>`;
-      } else if (boerMatch) {
-        userInterpretation += `<p class="turuncu">Boer formülüne göre yapılan tahmininiz, son kreatinin değerinizle daha uyumlu görünmektedir. Yağ oranına göre yapılan tahmin ise biraz farklı bir sonuç vermiştir.</p>`;
-      } else {
-        userInterpretation += `<p class="kirmizi">Yapılan tahminler, sizin son kreatinin değerinizden (${savedCreatinine29Jan} mg/dL) biraz farklılık göstermektedir. Bu tür hesaplayıcılar genel tahminler sunar ve bireysel farklılıklar olabilir. En doğru değerlendirme için doktorunuzla görüşmeniz önemlidir.</p>`;
-      }
-    } else {
-      const [minCalc, maxCalc] = getValue(lbmMethod === 'fat' && lbmFat !== null ? lbmFat : lbmBoer);
-      
-      userInterpretation += `<p>Sizin kayıtlı kan kreatinin değeriniz <strong>(6 Ağustos 2024: ${savedCreatinine8Aug} mg/dL, 29 Ocak 2025: ${savedCreatinine29Jan} mg/dL)</strong> ve referans aralığı <strong>(${creatinineReferenceMin}-${creatinineReferenceMax} mg/dL)</strong> dikkate alındığında:</p>`;
-
-      let currentMatch = (parseFloat(minCalc) <= savedCreatinine29Jan && savedCreatinine29Jan <= parseFloat(maxCalc));
-
-      if (currentMatch) {
-        userInterpretation += `<p class="yesil">Tahmin edilen aralık, son kreatinin değerinizle (${savedCreatinine29Jan} mg/dL) uyumludur. Bu, mevcut vücut kompozisyonunuz ve yaşam tarzınızla tutarlı bir seviye olduğunu düşündürmektedir.</p>`;
-      } else {
-        userInterpretation += `<p class="kirmizi">Tahmin edilen aralık, sizin son kreatinin değerinizden (${savedCreatinine29Jan} mg/dL) biraz farklılık göstermektedir. Bu tür hesaplayıcılar genel tahminler sunar ve bireysel farklılıklar olabilir. En doğru değerlendirme için doktorunuzla görüşmeniz önemlidir.</p>`;
-      }
-    }
-    
-    kreatininInterpretation.innerHTML = userInterpretation;
 }
