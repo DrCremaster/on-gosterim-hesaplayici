@@ -1,0 +1,25 @@
+<div id="hepsi" class="section">
+    <h3>Toplu Supplement Hesaplama</h3>
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="chk_protein" /> Protein</label>
+      <label><input type="checkbox" id="chk_kreatin" /> Kreatin</label>
+      <label><input type="checkbox" id="chk_beta" /> Beta-Alanin</label>
+      <label><input type="checkbox" id="chk_sitrulin" /> Sitrülin Malat</label>
+      <label><input type="checkbox" id="chk_karnitin" /> L-Karnitin</label>
+      <label><input type="checkbox" id="chk_kafein" /> Kafein</label>
+    </div>
+    <input type="number" id="toplu_kilo" placeholder="Kilonuz (kg)" onkeyup="if(event.keyCode === 13) hesaplaToplu()" />
+    <span id="toplu_kilo_warning" class="input-warning"></span>
+    <select id="toplu_hedef">
+      <option value="">-- Hedefinizi Seçiniz --</option>
+      <option value="koruma">Kilo Korumak</option>
+      <option value="alma">Kilo Almak</option>
+      <option value="verme">Kilo Vermek</option>
+    </select>
+    <span id="toplu_hedef_warning" class="input-warning"></span>
+    <button onclick="hesaplaToplu()">Hesapla</button>
+    <div id="topluSonuc" class="result"></div>
+    <div class="disclaimer">
+      Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz veya supplement kullanımı hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
+    </div>
+  </div>
