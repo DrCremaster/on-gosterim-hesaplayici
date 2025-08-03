@@ -1,18 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Sayfa yüklendiğinde genel feragatnameyi göster
-    document.getElementById('initialDisclaimer').style.display = 'block';
-    
-    // Tüm input alanlarına otomatik odaklanma ve klavye navigasyonu
-    document.querySelectorAll('input, select').forEach((input, index, inputs) => {
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const hesapListesi = document.getElementById('hesapListesi');
+    const contentSections = document.getElementById('contentSections');
+    const initialDisclaimer = document.getElementById('initialDisclaimer');
+    const container = document.querySelector('.container');
+
+    // Klavye navigasyonu ve odaklama yönetimi
+    document.querySelectorAll('input, select').forEach((input) => {
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                const nextInput = inputs[index + 1];
-                if (nextInput) {
-                    nextInput.focus();
+                const visibleFocusableElements = Array.from(document.querySelectorAll('.section[style*="display: block;"] input:not([type="hidden"]), .section[style*="display: block;"] select, .section[style*="display: block;"] button:not(.no-focus-on-enter)'));
+                const currentIndex = visibleFocusableElements.indexOf(this);
+
+                const nextElement = visibleFocusableElements[currentIndex + 1];
+                if (nextElement) {
+                    nextElement.focus();
                 } else {
-                    // Son input'ta enter'a basıldığında hesapla butonuna tıkla
-                    const activeSection = document.querySelector('.section[style="display: block;"]');
+                    const activeSection = document.querySelector('.section[style*="display: block;"]');
                     if (activeSection) {
                         const calculateBtn = activeSection.querySelector('button');
                         if (calculateBtn) calculateBtn.click();
@@ -24,28 +30,139 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Tooltip benzeri bilgi balonları ekle
     addInfoTooltips();
-    
-    // Hesaplama türü seçildiğinde ilgili bölümü yükle
-    document.getElementById("hesapSec").addEventListener('change', showSection);
+
+    // Dropdown menüyü açma/kapama
+    dropdownButton.addEventListener('click', () => {
+        dropdownContent.classList.toggle('open');
+        dropdownButton.classList.toggle('active');
+    });
+
+    // Hesaplama listesinden seçim yapma
+    hesapListesi.addEventListener('click', (event) => {
+        const selectedValue = event.target.dataset.value;
+        if (selectedValue) {
+            if (selectedValue === 'home') {
+                window.location.hash = ''; // Ana sayfaya dön
+            } else {
+                window.location.hash = selectedValue;
+            }
+            dropdownContent.classList.remove('open');
+            dropdownButton.classList.remove('active');
+            dropdownButton.innerHTML = `${event.target.textContent}<span class="dropdown-icon">&#9660;</span>`;
+        }
+    });
+
+    // URL hash'ini kontrol eden ve içeriği yükleyen fonksiyon
+    function loadContentFromHash() {
+        const hash = window.location.hash.substring(1);
+        
+        document.querySelectorAll('.input-warning').forEach(span => span.textContent = '');
+
+        if (hash) {
+            initialDisclaimer.style.display = 'none';
+            loadSection(hash);
+            const selectedText = document.querySelector(`[data-value="${hash}"]`).textContent;
+            dropdownButton.innerHTML = `${selectedText}<span class="dropdown-icon">&#9660;</span>`;
+        } else {
+            dropdownButton.innerHTML = `Hesaplama Türü Seçiniz<span class="dropdown-icon">&#9660;</span>`;
+            initialDisclaimer.style.display = 'block';
+            contentSections.innerHTML = '';
+            if (window.location.hash) {
+                history.replaceState(null, '', ' ');
+            }
+        }
+        adjustPageHeight(); // Sayfa içeriği yüklendikten sonra boyutu ayarla
+    }
+
+    // Sayfanın yüksekliğini içeriğe göre ayarlayan fonksiyon
+    function adjustPageHeight() {
+      const isHomepage = window.location.hash === '';
+      document.body.classList.toggle('anapage', isHomepage);
+      const mainContent = document.querySelector('.main-scroll-content');
+      if (isHomepage) {
+        // Ana sayfada içeriği esnek yap ve boşluk bırakma
+        mainContent.style.flexGrow = 1;
+        mainContent.style.minHeight = 'auto';
+      } else {
+        // Diğer sayfalarda içeriği esnek yapma ve boşluk bırakma
+        mainContent.style.flexGrow = 'unset';
+        mainContent.style.minHeight = 'calc(100vh - 200px)'; // Boşluk için ayarlanabilir değer
+      }
+    }
+
+
+    // Tarayıcının geri/ileri butonları kullanıldığında veya hash manuel olarak değiştiğinde
+    window.addEventListener('hashchange', loadContentFromHash);
+
+    // Sayfa ilk yüklendiğinde hash'i kontrol et ve ilgili içeriği yükle
+    loadContentFromHash();
+
+
+    // Bölüm yükleme fonksiyonu
+    async function loadSection(selectedValue) {
+        initialDisclaimer.style.display = 'none';
+        contentSections.innerHTML = '';
+
+        try {
+            const response = await fetch(`sections/${selectedValue}.html`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}. Section file not found or server error.`);
+            }
+            const htmlContent = await response.text();
+            contentSections.innerHTML = htmlContent;
+
+            const section = contentSections.querySelector('.section');
+            if (section) {
+                section.style.display = "block";
+                setTimeout(() => {
+                    section.style.opacity = "1";
+                }, 10);
+                
+                const firstInput = section.querySelector('input:not([type="hidden"]), select');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+
+            const scripts = contentSections.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                if (oldScript.src) {
+                    newScript.src = oldScript.src;
+                    newScript.async = false;
+                } else {
+                    newScript.textContent = oldScript.textContent;
+                }
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+
+        } catch (error) {
+            console.error('Bölüm yüklenirken bir hata oluştu:', error);
+            contentSections.innerHTML = `<div class="disclaimer danger">Hesaplama yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</div>`;
+            initialDisclaimer.style.display = 'block';
+            history.replaceState(null, '', ' ');
+        }
+    }
 });
 
+// Bilgi Tooltip Fonksiyonu
 function addInfoTooltips() {
     const tooltips = {
-        'p_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        'p_hedef': 'Mevcut fitness hedefinizi seçin',
-        'y_cinsiyet': 'Cinsiyetinize göre farklı hesaplama yapılacaktır',
-        'y_boy': 'Santimetre cinsinden boyunuzu girin',
-        'y_kilo': 'Kilogram cinsinden ağırlığınızı girin',
-        'y_boyun': 'Boyun çevrenizi cm cinsinden ölçün',
-        'y_bel': 'Bel çevrenizi cm cinsinden ölçün',
-        'y_kalca': 'Kalça çevrenizi cm cinsinden ölçün (kadınlar için)',
-        'k_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        'b_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        's_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        'l_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        'c_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        'toplu_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin',
-        'toplu_hedef': 'Mevcut fitness hedefinizi seçin',
+        'p_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        'p_hedef': 'Mevcut fitness hedefinizi seçin.',
+        'y_cinsiyet': 'Cinsiyetinize göre farklı hesaplama yapılacaktır.',
+        'y_boy': 'Santimetre cinsinden boyunuzu girin.',
+        'y_kilo': 'Kilogram cinsinden ağırlığınızı girin.',
+        'y_boyun': 'Boyun çevrenizi cm cinsinden ölçün.',
+        'y_bel': 'Bel çevrenizi cm cinsinden ölçün.',
+        'y_kalca': 'Kalça çevrenizi cm cinsinden ölçün (kadınlar için).',
+        'k_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        'b_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        's_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        'l_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        'c_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        'toplu_kilo': 'Vücut ağırlığınızı kilogram cinsinden girin.',
+        'toplu_hedef': 'Mevcut fitness hedefinizi seçin.',
         'gender': 'Cinsiyetinizi seçin (erkek/kadın).',
         'age': 'Yaşınızı girin.',
         'weight': 'Kilonuzu kilogram cinsinden girin.',
@@ -65,68 +182,4 @@ function addInfoTooltips() {
             element.setAttribute('aria-label', tooltips[id]);
         }
     });
-}
-
-async function showSection() {
-    const sec = document.getElementById("hesapSec").value;
-    const contentSectionsDiv = document.getElementById('contentSections');
-    document.getElementById('initialDisclaimer').style.display = 'none';
-    
-    contentSectionsDiv.innerHTML = '';
-    
-    document.querySelectorAll('.input-warning').forEach(span => span.textContent = '');
-
-    if (sec) {
-        try {
-            const response = await fetch(`sections/${sec}.html`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const htmlContent = await response.text();
-            contentSectionsDiv.innerHTML = htmlContent;
-
-            const section = contentSectionsDiv.querySelector('.section');
-            if (section) {
-                section.style.display = "block";
-                setTimeout(() => {
-                    section.style.opacity = "1";
-                }, 10);
-                
-                const firstInput = section.querySelector('input[type="number"], input[type="text"], select');
-                if (firstInput) {
-                    firstInput.focus();
-                }
-            }
-
-            if (sec === 'yag') {
-                const cinsiyetSelect = document.getElementById('y_cinsiyet');
-                if (cinsiyetSelect) {
-                    cinsiyetSelect.addEventListener('change', toggleHipInput);
-                    toggleHipInput();
-                }
-            }
-            
-        } catch (error) {
-            console.error('Bölüm yüklenirken hata oluştu:', error);
-            contentSectionsDiv.innerHTML = `<div class="disclaimer danger">Bölüm yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</div>`;
-        }
-    }
-}
-
-function toggleHipInput() {
-    const cinsiyet = document.getElementById('y_cinsiyet');
-    const kalcaInput = document.getElementById('y_kalca');
-    const kalcaWarning = document.getElementById('y_kalca_warning');
-
-    if (cinsiyet && kalcaInput && kalcaWarning) {
-        if (cinsiyet.value === 'kadin') {
-            kalcaInput.classList.remove('hidden');
-            kalcaWarning.classList.remove('hidden');
-        } else {
-            kalcaInput.classList.add('hidden');
-            kalcaWarning.classList.add('hidden');
-            kalcaInput.value = '';
-            kalcaWarning.textContent = '';
-        }
-    }
 }
