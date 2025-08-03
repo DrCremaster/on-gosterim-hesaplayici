@@ -4,38 +4,80 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Geliştirilmiş Fitness Hesaplayıcı</title>
+
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div class="container">
-  <h2>Geliştirilmiş Fitness Hesaplayıcı</h2>
-  <div id="initialDisclaimer" class="general-disclaimer">
-    <strong>Önemli Tıbbi Feragatname:</strong> Bu hesaplayıcıdaki tüm bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz, diyetiniz veya supplement kullanımınız hakkında herhangi bir karar vermeden önce daima nitelikli bir sağlık profesyoneline (doktor, diyetisyen vb.) danışmanız ŞARTTIR.
-  </div>
-  
-  <select id="hesapSec">
-    <option value="">-- Hesaplama Türü Seçiniz --</option>
-    <option value="hepsi">Toplu Supplement Hesaplama</option>
-    <option value="protein">Günlük Protein İhtiyacı</option>
-    <option value="kreatin">Kreatin</option>
-    <option value="kafein">Kafein</option>
-    <option value="sitrulin">Sitrülin Malat</option>
-    <option value="beta">Beta Alanin</option>
-    <option value="karnitin">L-Karnitin</option>
-    <option value="yag">Yağ Oranı&VKİ</option>
-    <option value="kreatinin">Kreatinin Tahmini</option>
-  </select>
+<body class="anapage">
 
-  <div id="contentSections"></div> 
+  <div class="container">
+    <div id="themeToggleButton" class="theme-toggle-switch">
+      <span class="icon-dark">&#9790;</span>
+      <span class="toggle-slider"></span>
+      <span class="icon-light">&#9788;</span>
+    </div>
 
-  <!-- EKLENEN TEK SATIR (ORTAYA HİZALI) -->
-  <div style="text-align: center; margin: 30px 0;">
-    <a href="kaynakca.html" target="_blank" style="color: #4361ee; font-weight: bold; text-decoration: none;">kaynakça</a>
-  </div>
-</div>
-<div class="page-footer-spacer"></div>
+    <h2>Geliştirilmiş Fitness Hesaplayıcı</h2>
 
-<script src="js/main.js"></script>
-<script src="js/calculations.js"></script>
+    <div id="dropdownMenu" class="dropdown-container">
+      <h3 id="dropdownButton" class="dropdown-button">
+        Hesaplama Türü Seçiniz
+        <span class="dropdown-icon">&#9660;</span>
+      </h3>
+      <div id="dropdownContent" class="dropdown-content">
+        <ul id="hesapListesi">
+          <li data-value="home">Ana Sayfa</li>
+          <li data-value="hepsi">Toplu Supplement Hesaplama</li>
+          <li data-value="protein">Günlük Protein İhtiyacı</li>
+          <li data-value="kreatin">Kreatin</li>
+          <li data-value="kafein">Kafein</li>
+          <li data-value="sitrulin">Sitrülin Malat</li>
+          <li data-value="beta">Beta Alanin</li>
+          <li data-value="karnitin">L-Karnitin</li>
+          <li data-value="eaa">EAA</li>
+          <li data-value="bcaa">BCAA</li>
+          <li data-value="glutamin">Glutamin</li>
+          <li data-value="yag">Yağ & VKİ</li>
+          <li data-value="kreatinin">Kreatinin Tahmini</li>
+        </ul>
+      </div>
+    </div>
+
+    <main class="main-scroll-content"> 
+        <div id="contentSections"></div> 
+    </main>
+
+    <div id="initialDisclaimer" class="general-disclaimer-new">
+        <h4 class="disclaimer-title">Önemli Tıbbi Feragatname</h4>
+        <p class="disclaimer-text">
+            Bu hesaplayıcıdaki tüm bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz, diyetiniz veya supplement kullanımınız hakkında herhangi bir karar vermeden önce daima nitelikli bir sağlık profesyoneline (doktor, diyetisyen vb.) danışmanız ŞARTTIR.
+        </p>
+    </div>
+
+    <footer>
+      <div class="footer-link">
+          <a href="kaynakca.html" target="_blank">Kaynakça</a>
+      </div>
+      <p>&copy; 2025 Fitness Hesaplayıcı. Tüm Hakları Saklıdır.</p>
+    </footer>
+  </div> 
+
+  <div class="page-bottom-spacer"></div>
+
+  <script src="js/common.js"></script>
+  <script src="js/betaHesaplayici.js"></script>
+  <script src="js/kafeinHesaplayici.js"></script>
+  <script src="js/karnitinHesaplayici.js"></script>
+  <script src="js/kreatinHesaplayici.js"></script>
+  <script src="js/kreatininTahminiHesaplayici.js"></script>
+  <script src="js/proteinHesaplayici.js"></script>
+  <script src="js/sitrulinHesaplayici.js"></script>
+   <script src="js/eaaHesaplayici.js"></script>
+   <script src="js/bcaaHesaplayici.js"></script>
+    <script src="js/glutaminHesaplayici.js"></script>
+  <script src="js/topluSupplementHesaplayici.js"></script>
+  <script src="js/yagOraniHesaplayici.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/theme.js"></script>
+
 </body>
 </html>
