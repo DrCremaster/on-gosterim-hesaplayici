@@ -1,0 +1,59 @@
+<div id="eaa" class="section">
+    <h3>EAA (Esansiyel Amino Asitler)</h3>
+    <input type="number" id="eaa_kilo" placeholder="Kilonuz (kg)" onkeyup="if(event.keyCode === 13) hesaplaEaa()" />
+    <span id="eaa_kilo_warning" class="input-warning"></span>
+    <button onclick="hesaplaEaa()">Hesapla</button>
+    <div id="eaaSonuc" class="result"></div>
+    <div class="supplement-section-info">
+      <h5 class="info-header">EAA Hakkında Bilgi:</h5>
+      <div class="not-metin">
+        <strong>Ne işe yarar:</strong> Kas protein sentezini doğrudan uyarır ve tüm temel amino asitleri sağlar. BCAA'dan daha kapsamlıdır.<br>
+        <strong>Nasıl kullanılır:</strong> Antrenman öncesi/sonrası 0.15-0.3g/kg dozunda alınabilir. Whey proteinden 1 saat önce/sonra alın.<br>
+        <strong>Etkisi ne zaman görülür:</strong> Düzenli kullanımda 2-4 haftada toparlanmada fark hissedilebilir.
+      </div>
+      <h5 class="info-header">Sıkça Sorulan Sorular:</h5>
+      <div class="not-metin">
+       <br><strong>Yeterli protein alıyorsam EAA gerekli mi?</strong><br>
+        Hayır. Günlük 1.6-2.2g/kg protein alıyorsanız ek EAA'ya ihtiyacınız yoktur.
+        <br><br>
+        <strong>EAA ile BCAA arasındaki temel fark nedir?</strong><br>
+        EAA tüm 9 esansiyel amino asidi içerirken, BCAA sadece 3'ünü (lösin, izolösin, valin) içerir. EAA daha kapsamlıdır.
+        <br><br>
+        <strong>EAA kullanırken nelere dikkat etmeliyim?</strong><br>
+        Günde 30g'dan fazla almayın, böbrek sorununuz varsa doktora danışın. Lösin oranı minumum %20-30 düzeyinde olmalı. Maximumu da %35'i geçen ürünlerden de kaçının diğer amino asit emilimlerini bozabilir.
+      </div>
+      <div class="doz-bilgisi">
+        <h6>Doz Aşımı (Hafifçe Yüksek Alım):</h6>
+        <ul class="not-maddeler">
+            <li><span class="turuncu">Olası Olumsuz Etkileri:</span>
+              <ul>
+                <li>Hafif mide rahatsızlığı</li>
+              </ul>
+            </li>
+            <li><span class="yesil">Olası Olumlu Etkileri:</span>
+              <ul>
+                <li>Yoğun antrenman sonrası toparlanma desteği</li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+      <div class="doz-bilgisi danger">
+        <h6>Aşırı Doz Aşımı (Çok Yüksek Alım):</h6>
+        <ul class="not-maddeler">
+          <li><strong>Günlük 40 gram üzeri kullanım:</strong>
+            <ul>
+              <li><span class="kirmizi">Olumsuz Etkileri:</span>
+                  <ul>
+                      <li>Böbreklerde ekstra yük</li>
+                      <li>Amino asit dengesizliği</li>
+                  </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz veya supplement kullanımı hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
+    </div>
+</div>

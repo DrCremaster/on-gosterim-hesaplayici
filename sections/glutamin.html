@@ -1,0 +1,59 @@
+<div id="glutamin" class="section">
+    <h3>Glutamin</h3>
+    <input type="number" id="glutamin_kilo" placeholder="Kilonuz (kg)" onkeyup="if(event.keyCode === 13) hesaplaGlutamin()" />
+    <span id="glutamin_kilo_warning" class="input-warning"></span>
+    <button onclick="hesaplaGlutamin()">Hesapla</button>
+    <div id="glutaminSonuc" class="result"></div>
+    <div class="supplement-section-info">
+      <h5 class="info-header">Glutamin Hakkında Bilgi:</h5>
+      <div class="not-metin">
+        <strong>Ne işe yarar:</strong> Bağırsak sağlığını destekler ve yoğun antrenman sonrası bağışıklık sistemine yardımcı olabilir.<br>
+        <strong>Nasıl kullanılır:</strong> Antrenman sonrası veya yatmadan önce 0.1-0.3 g/kg dozunda alınabilir.<br>
+        <strong>Etkisi ne zaman görülür:</strong> Bağırsak problemlerinde birkaç gün içinde, sporcularda ise 1-2 haftada etki gösterebilir.
+      </div>
+      <h5 class="info-header">Sıkça Sorulan Sorular:</h5>
+      <div class="not-metin">
+        <strong>Glutamin gerçekten işe yarar mı? Gerekli mi?</strong><br>
+        Glutamin özellikle bağırsak problemleri (IBS, sızdıran bağırsak) olanlarda ve aşırı yoğun antrenman yapanlarda faydalı olabilir. Ancak yeterli protein alan sağlıklı bireylerde kas gelişimine katkısı minimaldir. Whey proteinde zaten yeterli glutamin bulunur.
+        <br><br>
+        <strong>Kimler glutamin kullanmalı?</strong><br>
+        Kronik bağırsak sorunu olanlar, kemoterapi görenler, aşırı yoğun antrenman yapanlar (günde 2+ saat) ve vegan beslenenlerde protein alımı yetersizse fayda görebilir.
+        <br><br>
+        <strong>Kullanmamam gereken durumlar var mı?</strong><br>
+        Böbrek/karaciğer hastaları, epilepsi tedavisi görenler, yeterli hayvansal protein tüketen sağlıklı bireyler ve hamileler doktora danışmadan kullanmamalıdır. Aşırı doz (günde 20g+) amino asit dengesini bozabilir.
+      </div>
+      <div class="doz-bilgisi">
+        <h6>Doz Aşımı (Hafifçe Yüksek Alım):</h6>
+        <ul class="not-maddeler">
+            <li><span class="turuncu">Olası Olumsuz Etkileri:</span>
+              <ul>
+                <li>Hafif mide rahatsızlığı ve gaz</li>
+              </ul>
+            </li>
+            <li><span class="yesil">Olası Olumlu Etkileri:</span>
+              <ul>
+                <li>Yoğun antrenman sonrası bağışıklık desteği</li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+      <div class="doz-bilgisi danger">
+        <h6>Aşırı Doz Aşımı (Çok Yüksek Alım):</h6>
+        <ul class="not-maddeler">
+          <li><strong>Günlük 40 gram üzeri kullanım:</strong>
+            <ul>
+              <li><span class="kirmizi">Olumsuz Etkileri:</span>
+                  <ul>
+                      <li>Böbreklerde ekstra yük</li>
+                      <li>Şiddetli sindirim problemleri</li>
+                  </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      Uyarı: Bu hesaplayıcıdaki bilgiler genel rehber niteliğindedir ve tıbbi tavsiye yerine geçmez. Sağlık durumunuz veya supplement kullanımı hakkında karar vermeden önce daima bir sağlık profesyoneline danışın.
+    </div>
+</div>
